@@ -18,12 +18,13 @@ namespace GPACalculator
             _courseScore = courseScore;
         }
 
+        public Tuple<Grader.Grades, string> GradeProps => Grader.GetGradeProperties(CourseScore);
         public string CourseNameAndCode => _courseNameAndCode;
         public int CourseUnit => _courseUnit;
         public int CourseScore => _courseScore;
-        public Tuple<Grader.Grades, string> GradeProps => Grader.GetGradeProperties(CourseScore);
         public string Grade => GradeProps.Item1.ToString();
         public string Remark => GradeProps.Item2;
-        public int WeightPoint => (int)GradeProps.Item1 * CourseUnit;
+        public int GradeUnit => (int)GradeProps.Item1;
+        public int WeightPoint => GradeUnit * CourseUnit;
     }
 }

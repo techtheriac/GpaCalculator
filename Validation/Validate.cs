@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace GPACalculator
+namespace GPALibrary
 {
     public static class Validate
     {
@@ -36,34 +36,38 @@ namespace GPACalculator
 
 
         private static bool IsWithinScoreRange(int score)
-              => 0 <= score && score < 100;
+              => 0 <= score && score <= 100;
 
         private static bool IsWithinCourseUnitRange(int courseUnit)
-           => 0 <= courseUnit && courseUnit < 120;
+           => 0 <= courseUnit && courseUnit <= 5;
 
         public static Tuple<int, string> Score (int score)
         {
-            if(IsWithinScoreRange(score))
-            {
-                return Tuple.Create(score, ParseScore(Valid.Success));
-            } else
+            if(!IsWithinScoreRange(score))
             {
                 return Tuple.Create(0, ParseScore(Valid.Error));
+            } else
+            {
+                return Tuple.Create(score, ParseScore(Valid.Success));
             }
         }
 
         public static Tuple<int, string> CourseUnit(int courseUnit)
         {
-            if(IsWithinCourseUnitRange(courseUnit))
-            {
-                return Tuple.Create(courseUnit, ParseScoreUnit(Valid.Success));
-            } else
+            if(!IsWithinCourseUnitRange(courseUnit))
             {
                 return Tuple.Create(0, ParseScoreUnit(Valid.Error));
+            } else
+                return Tuple.Create(courseUnit, ParseScoreUnit(Valid.Success));
+            {
             }
 
         }
 
+        //public static Tuple<string, string> CourseCode(int courseCode)
+        //{
+
+        //}
 
     }
 }

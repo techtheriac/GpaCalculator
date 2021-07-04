@@ -28,3 +28,4 @@ namespace GPACalculator
         public int WeightPoint => GradeUnit * CourseUnit;
     }
 }
+ 

@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 namespace GPACalculator
 {
-    class GradingApp
+    public class GradingApp
     {
         List<Course> CourseList = new List<Course> { };
 
@@ -20,19 +21,20 @@ namespace GPACalculator
             return total;
         }
 
-        private int GetGradeUnitTotal ()
+        private int GetCourseUnitTotal ()
         {
             int total = 0;
 
             foreach (var item in CourseList)
             {
-                total += item.GradeUnit;
+                total += item.CourseUnit;
             }
 
             return total;
         }
 
-        public int TotalGradeUnit => GetGradeUnitTotal();
+        public int TotalCourseUnit => GetCourseUnitTotal();
         public int TotalWeightPoint => GetWeightPointTotal();
+        public decimal GPA => Decimal.Round(TotalWeightPoint / TotalCourseUnit, 2);
     }
 }

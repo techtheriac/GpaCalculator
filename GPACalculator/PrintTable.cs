@@ -4,7 +4,14 @@ using System.Text;
 
 namespace GPACalculator
 {
-    class PrintTable
+    public static class PrintTable
     {
+        public static void Print(List<Course> courses)
+        {
+        
+        
+        }
+
+
     }
 }

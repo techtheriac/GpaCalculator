@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.RegularExpressions;
 
-namespace GPALibrary
+namespace Utils
 {
     public static class Validate
     {
@@ -25,21 +26,27 @@ namespace GPALibrary
             _ => throw new ArgumentOutOfRangeException(),
         };
 
-        //public static Orientation ToOrientation(Direction direction) => direction switch
-        //{
-        //    Direction.Up => Orientation.North,
-        //    Direction.Right => Orientation.East,
-        //    Direction.Down => Orientation.South,
-        //    Direction.Left => Orientation.West,
+        private static string ParseCourseCode(Valid message) => message switch
+        {
+            Valid.Success => "Course Code Added Sucessfully",
+            Valid.Error => "Invalid Course code. Kindly input course code of the format: MATH201",
+            _ => throw new ArgumentOutOfRangeException(),
+        };
+
         //    _ => throw new ArgumentOutOfRangeException(nameof(direction), $"Not expected direction value: {direction}"),
-        //};
-
-
+       
         private static bool IsWithinScoreRange(int score)
               => 0 <= score && score <= 100;
 
         private static bool IsWithinCourseUnitRange(int courseUnit)
            => 0 <= courseUnit && courseUnit <= 5;
+
+        private static bool isValidCourseCode(string courseCode)
+        {
+            string pattern = @"([A-Z]{1,5}[0-9$])\w+";
+            Regex CodeRgx = new Regex(pattern, RegexOptions.IgnoreCase);
+            return CodeRgx.IsMatch(courseCode);
+        }
 
         public static Tuple<int, string> Score (int score)
         {
@@ -64,10 +71,16 @@ namespace GPALibrary
 
         }
 
-        //public static Tuple<string, string> CourseCode(int courseCode)
-        //{
-
-        //}
+        public static Tuple<string, string> CourseCode(string courseCode)
+        {
+            if(!isValidCourseCode(courseCode))
+            {
+                return Tuple.Create("", ParseCourseCode(Valid.Error));
+            } else
+            {
+                return Tuple.Create(courseCode, ParseCourseCode(Valid.Success));
+            }
+        }
 
     }
 }

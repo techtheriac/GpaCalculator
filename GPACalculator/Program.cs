@@ -1,6 +1,6 @@
 ﻿using System;
-using Figgle;
-using GPALibrary;
+using Utils;
+using System.Text.RegularExpressions;
 
 namespace GPACalculator
 {
@@ -12,7 +12,7 @@ namespace GPACalculator
             // No need to overthink on subclass level
             Course maths = new Course("Math", 4, 190);
 
-            Console.WriteLine(Validate.Score(100).Item1);
+            Console.WriteLine(Validate.CourseCode("ENF910").Item2);
         }
     }
 }

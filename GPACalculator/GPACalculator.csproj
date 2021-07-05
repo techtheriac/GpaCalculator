@@ -10,7 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Validation\GPALibrary.csproj" />
+    <ProjectReference Include="..\Validation\Utils.csproj" />
   </ItemGroup>
 
 </Project>

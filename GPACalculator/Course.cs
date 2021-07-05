@@ -4,7 +4,7 @@ using System.Text;
 
 namespace GPACalculator
 {
-    class Course
+    public class Course
     {
         
         private string _courseNameAndCode;

@@ -9,6 +9,7 @@ namespace GPACalculator
     {
         List<Course> CourseList = new List<Course> { };
 
+        //PrintTable Printer = new PrintTable();
         private int GetWeightPointTotal ()
         {
             int total = 0;

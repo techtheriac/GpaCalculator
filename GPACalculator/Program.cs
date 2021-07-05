@@ -10,9 +10,10 @@ namespace GPACalculator
         {
             // My Guy, Catch errors early.
             // No need to overthink on subclass level
-            Course maths = new Course("Math", 4, 190);
 
-            Console.WriteLine(Validate.CourseCode("ENF910").Item2);
+            GradingApp Application = new GradingApp();
+
+            Application.AddCourseDetails();
         }
     }
 }

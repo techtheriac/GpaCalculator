@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using Utils;
 
 namespace GPACalculator
 {
@@ -9,7 +10,11 @@ namespace GPACalculator
     {
         List<Course> CourseList = new List<Course> { };
 
-        //PrintTable Printer = new PrintTable();
+
+        private int _courseUnit;
+        private int _score;
+        private string _courseCode;
+
         private int GetWeightPointTotal ()
         {
             int total = 0;
@@ -33,6 +38,70 @@ namespace GPACalculator
 
             return total;
         }
+
+        public void AddCourseCode()
+        {
+            Console.Write("Input Course Code");
+            string cc = Console.ReadLine();
+
+            if(Validate.CourseCode(cc).Item1 != "")
+            {
+                _courseCode = Validate.CourseCode(cc).Item1;
+                Console.WriteLine(Validate.CourseCode(cc).Item2);
+                return;
+
+            } else
+            {
+                Console.WriteLine(Validate.CourseCode(cc).Item2);
+                AddCourseCode();
+            }
+        }
+
+        public void AddCourseScore()
+        {
+            Console.Write("Input Score");
+            int cs = Int32.Parse(Console.ReadLine());
+
+            if(Validate.Score(cs).Item1 != 0)
+            {
+                _score = Validate.Score(cs).Item1;
+                Console.WriteLine(Validate.Score(cs).Item2);
+                return;
+            } else
+            {
+                Console.WriteLine(Validate.Score(cs).Item2);
+                AddCourseScore();
+            }
+        }
+
+        public void AddCourseUnit()
+        {
+            Console.Write("Input Course Unit");
+            int cu = Int32.Parse(Console.ReadLine());
+
+            if(Validate.CourseUnit(cu).Item1 != 0)
+            {
+                _courseUnit = Validate.CourseUnit(cu).Item1;
+                Console.WriteLine(Validate.CourseUnit(cu).Item2);
+                return;
+            } else
+            {
+                Console.WriteLine(Validate.CourseUnit(cu).Item2);
+                AddCourseUnit();
+            }
+        }
+
+        public void AddCourseDetails()
+        {
+
+            AddCourseCode();
+            AddCourseUnit();
+            AddCourseScore();
+
+            CourseList.Add(new Course(_courseCode, _courseUnit, _score));
+        }
+
+
 
         public int TotalCourseUnit => GetCourseUnitTotal();
         public int TotalWeightPoint => GetWeightPointTotal();

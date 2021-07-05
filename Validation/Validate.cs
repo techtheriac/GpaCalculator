@@ -41,6 +41,7 @@ namespace Utils
         private static bool IsWithinCourseUnitRange(int courseUnit)
            => 0 <= courseUnit && courseUnit <= 5;
 
+
         private static bool isValidCourseCode(string courseCode)
         {
             string pattern = @"([A-Z]{1,5}[0-9$])\w+";
@@ -59,6 +60,18 @@ namespace Utils
             }
         }
 
+        public static int SafeParseInt(string x)
+        {
+            if (Int32.TryParse(x, out int j))
+            {
+                return j;
+            }
+            else
+            {
+                Console.WriteLine("Your Input is Invalid");
+                return -1;
+            }
+        }
         public static Tuple<int, string> CourseUnit(int courseUnit)
         {
             if(!IsWithinCourseUnitRange(courseUnit))

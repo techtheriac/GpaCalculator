@@ -38,7 +38,7 @@ namespace GPACalculator
 
             return total;
         }
-
+        
         public void AddCourseCode()
         {
             Console.Write("Input Course Code");
@@ -60,9 +60,9 @@ namespace GPACalculator
         public void AddCourseScore()
         {
             Console.Write("Input Score");
-            int cs = Int32.Parse(Console.ReadLine());
+            var cs = Validate.SafeParseInt(Console.ReadLine());
 
-            if(Validate.Score(cs).Item1 != 0)
+            if(cs != -1 && Validate.Score(cs).Item1 != 0)
             {
                 _score = Validate.Score(cs).Item1;
                 Console.WriteLine(Validate.Score(cs).Item2);
@@ -77,9 +77,9 @@ namespace GPACalculator
         public void AddCourseUnit()
         {
             Console.Write("Input Course Unit");
-            int cu = Int32.Parse(Console.ReadLine());
+            int cu = Validate.SafeParseInt(Console.ReadLine());
 
-            if(Validate.CourseUnit(cu).Item1 != 0)
+            if(cu != -1 && Validate.CourseUnit(cu).Item1 != 0)
             {
                 _courseUnit = Validate.CourseUnit(cu).Item1;
                 Console.WriteLine(Validate.CourseUnit(cu).Item2);

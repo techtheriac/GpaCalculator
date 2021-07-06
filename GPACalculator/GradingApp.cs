@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Linq;
+using Figgle;
 using Utils;
 
 namespace GPACalculator
@@ -9,11 +9,20 @@ namespace GPACalculator
     public class GradingApp
     {
         List<Course> CourseList = new List<Course> { };
-
+        List<string> Manual = new List<string>
+        {
+            "Here are a list of thing you can do",
+            "Type 'add' to add course details",
+            "Type 'print' to view course listing and properties",
+            "Type 'gpa' to view calculated Grade Point Average",
+            "Type 'help' to view this manual",
+            "Type 'exit' to terminate application"
+        };
 
         private int _courseUnit;
         private int _score;
         private string _courseCode;
+        private string _action;
 
         private int GetWeightPointTotal ()
         {
@@ -41,7 +50,8 @@ namespace GPACalculator
         
         public void AddCourseCode()
         {
-            Console.Write("Input Course Code");
+            Console.WriteLine("Input Course Code");
+            Console.Write(">> ");
             string cc = Console.ReadLine();
 
             if(Validate.CourseCode(cc).Item1 != "")
@@ -59,7 +69,8 @@ namespace GPACalculator
 
         public void AddCourseScore()
         {
-            Console.Write("Input Score");
+            Console.WriteLine("Input Score");
+            Console.Write(">> ");
             var cs = Validate.SafeParseInt(Console.ReadLine());
 
             if(cs != -1 && Validate.Score(cs).Item1 != 0)
@@ -76,7 +87,8 @@ namespace GPACalculator
 
         public void AddCourseUnit()
         {
-            Console.Write("Input Course Unit");
+            Console.WriteLine("Input Course Unit");
+            Console.Write(">> ");
             int cu = Validate.SafeParseInt(Console.ReadLine());
 
             if(cu != -1 && Validate.CourseUnit(cu).Item1 != 0)
@@ -93,15 +105,67 @@ namespace GPACalculator
 
         public void AddCourseDetails()
         {
-
             AddCourseCode();
             AddCourseUnit();
             AddCourseScore();
-
             CourseList.Add(new Course(_courseCode, _courseUnit, _score));
         }
 
+        private void PrintWelcomeMessage(string message)
+        {
+            Console.WriteLine("");
+            Console.WriteLine($"{FiggleFonts.SlantSmall.Render(message)}");
+            Console.WriteLine("\t Welcome to the GPA Calculator Application");
+        }
 
+        public void PrintMaual(List<string> manual)
+        {
+            foreach (var item in manual)
+            {
+                Console.WriteLine($"\t {item}");
+            }
+        }
+
+        public void Prodecure(int count, int max)
+        {
+            Console.Write(">> ");
+            string _action = Console.ReadLine().ToLower();
+
+            if(count >= max || _action == "exit")
+            {
+                return;
+            }
+
+
+            if(!Validate.IsValidAction(_action))
+            {
+                Console.WriteLine("You have made an Invalid Selection");
+                Prodecure(count + 1, int.MaxValue);
+            }
+
+            switch(_action)
+            {
+                case "help":
+                    PrintMaual(Manual);
+                    break;
+                case "add":
+                    AddCourseDetails();
+                    break;
+                case "exit":
+                    return;
+                default:
+                Prodecure(count + 1, int.MaxValue);
+                    break;
+            }
+
+            Prodecure(count + 1, int.MaxValue);
+        }
+
+        public void Init()
+        {
+            PrintWelcomeMessage("GPA CALCULATOR");
+            PrintMaual(Manual);
+        }
 
         public int TotalCourseUnit => GetCourseUnitTotal();
         public int TotalWeightPoint => GetWeightPointTotal();

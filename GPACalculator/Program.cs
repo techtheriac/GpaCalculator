@@ -1,6 +1,5 @@
 ﻿using System;
 using Utils;
-using System.Text.RegularExpressions;
 
 namespace GPACalculator
 {
@@ -12,8 +11,8 @@ namespace GPACalculator
             // No need to overthink on subclass level
 
             GradingApp Application = new GradingApp();
-
-            Application.AddCourseDetails();
+            Application.Init();
+            Application.Prodecure(0, int.MaxValue);
         }
     }
 }

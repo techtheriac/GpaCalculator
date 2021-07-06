@@ -43,7 +43,11 @@ namespace Utils
 
         public static bool IsValidAction(string action)
         {
-            return action == "print" || action == "help" || action == "add" || action == "exit";
+            return action == "print" || 
+                   action == "help" || 
+                   action == "add" || 
+                   action == "exit" ||
+                   action == "gpa";
         } 
 
 

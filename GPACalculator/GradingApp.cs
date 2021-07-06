@@ -128,7 +128,7 @@ namespace GPACalculator
 
         public void Prodecure(int count, int max)
         {
-            string subsequentPrompt = count > 1 ? "What Else Would You Like to do?" : "";
+            string subsequentPrompt = count >= 1 ? "What Else Would You Like to do?" : "";
             Console.WriteLine(subsequentPrompt);
 
             Console.Write(">> ");

@@ -8,7 +8,7 @@ namespace GPACalculator
         static void Main(string[] args)
         {
             // My Guy, Catch errors early.
-            // No need to overthink on subclass level
+            // No need to overthink beyond user input validation
 
             GradingApp Application = new GradingApp();
             Application.Init();

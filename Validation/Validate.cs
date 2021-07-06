@@ -55,7 +55,7 @@ namespace Utils
         {
             string pattern = @"([A-Z]{1,5}[0-9$])\w+";
             Regex CodeRgx = new Regex(pattern, RegexOptions.IgnoreCase);
-            return CodeRgx.IsMatch(courseCode);
+            return CodeRgx.IsMatch(courseCode) && courseCode.Length == 6;
         }
 
         public static Tuple<int, string> Score (int score)

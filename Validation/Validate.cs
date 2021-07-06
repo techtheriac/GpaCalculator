@@ -41,6 +41,11 @@ namespace Utils
         private static bool IsWithinCourseUnitRange(int courseUnit)
            => 0 <= courseUnit && courseUnit <= 5;
 
+        public static bool IsValidAction(string action)
+        {
+            return action == "print" || action == "help" || action == "add" || action == "exit";
+        } 
+
 
         private static bool isValidCourseCode(string courseCode)
         {

@@ -115,20 +115,25 @@ namespace GPACalculator
         {
             Console.WriteLine("");
             Console.WriteLine($"{FiggleFonts.SlantSmall.Render(message)}");
-            Console.WriteLine("\t Welcome to the GPA Calculator Application");
+            Console.WriteLine("  Welcome to the GPA Calculator Application");
         }
 
         public void PrintMaual(List<string> manual)
         {
             foreach (var item in manual)
             {
-                Console.WriteLine($"\t {item}");
+                Console.WriteLine($"  {item}");
             }
+        }
+
+        private void PrintGPA ()
+        {
+            Console.WriteLine($"  Your Grade Point Average is {GPA}");
         }
 
         public void Prodecure(int count, int max)
         {
-            string subsequentPrompt = count >= 1 ? "What Else Would You Like to do?" : "";
+            string subsequentPrompt = count >= 1 ? "  What Else Would You Like to do?" : "";
             Console.WriteLine(subsequentPrompt);
 
             Console.Write(">> ");
@@ -143,7 +148,7 @@ namespace GPACalculator
             if(!Validate.IsValidAction(_action))
             {
                 Console.WriteLine("You have made an Invalid Selection");
-                Prodecure(count + 1, int.MaxValue);
+                Prodecure(count, int.MaxValue);
             }
 
             switch(_action)
@@ -154,10 +159,16 @@ namespace GPACalculator
                 case "add":
                     AddCourseDetails();
                     break;
+                case "print":
+                    PrintTable.Print(CourseList);
+                    break;
+                case "gpa":
+                    PrintGPA();
+                    break;
                 case "exit":
                     return;
                 default:
-                Prodecure(count + 1, int.MaxValue);
+                Prodecure(count, int.MaxValue);
                     break;
             }
 

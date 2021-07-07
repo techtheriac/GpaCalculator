@@ -183,6 +183,6 @@ namespace GPACalculator
 
         public int TotalCourseUnit => GetCourseUnitTotal();
         public int TotalWeightPoint => GetWeightPointTotal();
-        public decimal GPA => Decimal.Round(TotalWeightPoint / TotalCourseUnit, 2);
+        public decimal GPA => Decimal.Round((decimal)TotalWeightPoint / (decimal)TotalCourseUnit, 2);
     }
 }

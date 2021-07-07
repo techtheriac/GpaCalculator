@@ -29,7 +29,7 @@ namespace Utils
         private static string ParseCourseCode(Valid message) => message switch
         {
             Valid.Success => "Course Code Added Sucessfully",
-            Valid.Error => "Invalid Course code. Kindly input course code of the format: MATH201",
+            Valid.Error => "Invalid Course code. Kindly input course code of the format: MAT201, ENG101",
             _ => throw new ArgumentOutOfRangeException(),
         };
 
